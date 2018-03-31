@@ -103,3 +103,4 @@ ENV/
 # textos
 *.txt
 *.csv
+.idea/
