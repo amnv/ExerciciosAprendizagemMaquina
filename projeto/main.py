@@ -1,5 +1,6 @@
 from bean_object import Bean_object
 from knn import Knn
+from knn_weight import Knn_weight
 
 texto = open("../base1.csv")
 beans_list = []
@@ -13,17 +14,24 @@ for line in texto:
         break
     count += 1
 
+print("knn com peso")
+a = Knn_weight(["true", "false"])
+a.train(beans_list)
+result = a.teste(beans_list)
+
+for i in result:
+        print("classificado: ", i.classified, " esperado: ", i.label)
+
+print("\------------------------------------------/")
+print("Knn simples")
 alg = Knn()
 #train
 alg.train(beans_list)
-print("vou passar")
 #teste
 
 result = alg.teste(beans_list)
-print("passei")
 
 #result
 for i in result:
-        print("classificado: ", i.classified, "esperado: ", i.label)
+        print("classificado: ", i.classified, " esperado: ", i.label)
 
-print("asd")

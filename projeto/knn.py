@@ -25,7 +25,11 @@ class Knn:
 
     def teste_val(self, item, k, dist_func):
         nearsts = self.find_nearst(item, k, dist_func)
+
+        # Classes of k closest items
         class_list = map(lambda x: self.items[x[0]], nearsts)
+
+        # Most frequent class
         return Counter(class_list).most_common(1)[0][0]
 
     def teste(self, data, dist_func = euclidian_distancy, k=1):
