@@ -1,11 +1,13 @@
 import numpy as np
 import math
 from collections import Counter
+#from scipy.spatial import distance
 
 class Knn:
 
     def __init__(self):
         self.items = {}
+       # self.euclidian_distancy = distance.euclidean
 
     def euclidian_distancy(self, vTested, vBase):
         v1, v2 = np.asarray(vTested, dtype=np.float32), np.array(vBase, dtype=np.float32)
@@ -32,7 +34,14 @@ class Knn:
         return data
 
     def accuracy(self, data):
-        pass
+        count = 0
+
+        # Checking amount of correct classification
+        for i in data:
+            if i.classified == i.label:
+                count += 1
+
+        return count/len(data)
 
     def precision(self, data):
         pass
