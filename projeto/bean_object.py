@@ -13,3 +13,18 @@ class Bean_object:
         features = tuple(line.split(","))
         last_item = len(features) - 1
         self.label = features[last_item]
+
+    @staticmethod
+    def build_bean(text, count = -1):
+        beans_list = []
+        for line in text:
+            aux = Bean_object()
+            aux.build_features(line)
+            aux.build_label(line)
+            beans_list.append(aux)
+            if count > 0:
+                count -= 1
+            elif count != -1:
+                break
+
+        return beans_list

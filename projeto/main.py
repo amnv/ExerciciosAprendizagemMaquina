@@ -1,18 +1,11 @@
-from bean_object import Bean_object
-from knn import Knn
-from knn_weight import Knn_weight
+from projeto.bean_object import Bean_object
+from projeto.knn import Knn
+from projeto.knn_weight import Knn_weight
+from projeto.visualization import  Visualization
 
 texto = open("../base1.csv")
 beans_list = []
-count = 0
-for line in texto:
-    aux = Bean_object()
-    aux.build_features(line)
-    aux.build_label(line)
-    beans_list.append(aux)
-    if count >= 100:
-        break
-    count += 1
+
 
 print("knn com peso")
 a = Knn_weight(["true", "false"])
