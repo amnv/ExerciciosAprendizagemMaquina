@@ -30,14 +30,15 @@ class Knn:
             item.classified = self.teste_val(item.feature, k, dist_func)
         return data
 
-    def accuracy(self, data):
+    @staticmethod
+    def accuracy(data):
         count = 0
 
         # Checking amount of correct classification
         for i in data:
             if i.classified == i.label:
                 count += 1
-
+        
         return count/len(data)
 
     def precision(self, data):

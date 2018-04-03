@@ -1,30 +1,41 @@
-from projeto.bean_object import Bean_object
-from projeto.knn import Knn
-from projeto.knn_weight import Knn_weight
-from projeto.visualization import  Visualization
+from bean_object import Bean_object
+from knn import Knn
+from knn_weight import Knn_weight
+from visualization import  Visualization
 
+# Preprocessing
 texto = open("../base1.csv")
-beans_list = []
+beans_list = Bean_object.build_bean(texto, 10)
+k_values = [1, 2, 3, 5, 7, 9, 11, 13, 15]
+test_set = train_set = beans_list
+accuracy = []
 
-
-print("knn com peso")
-a = Knn_weight(["true", "false"])
-a.train(beans_list)
-result = a.teste(beans_list)
-
-for i in result:
-        print("classificado: ", i.classified, " esperado: ", i.label)
-
-print("\------------------------------------------/")
+# Simple knn
 print("Knn simples")
 alg = Knn()
-#train
-alg.train(beans_list)
-#teste
 
-result = alg.teste(beans_list)
+for k in k_values:
+        #train
+        alg.train(test_set)
 
-#result
-for i in result:
-        print("classificado: ", i.classified, " esperado: ", i.label)
+        #teste
+        result = alg.teste(train_set)
+
+        #result
+        accuracy.append(Knn.accuracy(result))
+        print("acuracy simple knn {0} with k {1}".format(accuracy[-1], k))
+
+print("\n")
+# Weighted knn
+print("knn com peso")
+accuracy = []
+for k in k_values:
+        a = Knn_weight(["true", "false"])
+        a.train(beans_list)
+        result = a.teste(beans_list)
+
+        #avaliation result
+        accuracy.append(Knn.accuracy(result))
+        print("acuracy weighted knn {0} with k {1}".format(Knn_weight.accuracy(result), k))
+       
 
