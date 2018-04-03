@@ -4,38 +4,27 @@ from knn_weight import Knn_weight
 from visualization import  Visualization
 
 # Preprocessing
-texto = open("../base1.csv")
-beans_list = Bean_object.build_bean(texto, 10)
-k_values = [1, 2, 3, 5, 7, 9, 11, 13, 15]
-test_set = train_set = beans_list
+from projeto.distancies import Distancy
+from projeto.rotinas import Rotinas
+
+texto = open("../base2.csv")
+beans_list = Bean_object.build_bean(texto)
+
 accuracy = []
+accuracy_list_per_k = []
+data, classification = Bean_object.build_bean_splited(beans_list)
+generator = Knn.split_data(data, classification)
 
 # Simple knn
 print("Knn simples")
 alg = Knn()
+rot = Rotinas()
+rot.run(alg, generator, beans_list)
 
-for k in k_values:
-        #train
-        alg.train(test_set)
-
-        #teste
-        result = alg.teste(train_set)
-
-        #result
-        accuracy.append(Knn.accuracy(result))
-        print("acuracy simple knn {0} with k {1}".format(accuracy[-1], k))
 
 print("\n")
 # Weighted knn
 print("knn com peso")
-accuracy = []
-for k in k_values:
-        a = Knn_weight(["true", "false"])
-        a.train(beans_list)
-        result = a.teste(beans_list)
-
-        #avaliation result
-        accuracy.append(Knn.accuracy(result))
-        print("acuracy weighted knn {0} with k {1}".format(Knn_weight.accuracy(result), k))
-       
-
+alg = Knn_weight(Distancy.get_class(beans_list))
+rot = Rotinas()
+rot.run(alg, generator, beans_list)

@@ -29,3 +29,14 @@ class Bean_object:
                 break
 
         return beans_list
+
+    @staticmethod
+    def build_bean_splited(data):
+        data_list = []
+        label_list = []
+
+        for i in data:
+            data_list.append(i.feature)
+            label_list.append(i.label)
+
+        return data_list, label_list

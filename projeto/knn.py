@@ -1,6 +1,7 @@
 from collections import Counter
 from distancies import Distancy
 #from scipy.spatial import distance
+from sklearn.model_selection import StratifiedKFold
 
 class Knn:
 
@@ -39,10 +40,15 @@ class Knn:
             if i.classified == i.label:
                 count += 1
         
-        return count/len(data)
+        return count/len(data) if len(data) > 0 else 0
 
     def precision(self, data):
         pass
 
     def recall(self, data):
         pass
+
+    @staticmethod
+    def split_data(data, label, k=5):
+        skf = StratifiedKFold(n_splits=k)
+        return skf.split(data, label)
