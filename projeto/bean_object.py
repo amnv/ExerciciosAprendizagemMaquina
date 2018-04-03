@@ -10,6 +10,7 @@ class Bean_object:
         self.feature = features[:last_item - 1]
 
     def build_label(self, line):
+        line = line.split("\n")[0]
         features = tuple(line.split(","))
         last_item = len(features) - 1
         self.label = features[last_item]
