@@ -104,3 +104,4 @@ ENV/
 *.txt
 *.csv
 .idea/
+*.png
