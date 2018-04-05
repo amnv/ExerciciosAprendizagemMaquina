@@ -21,4 +21,4 @@ class Knn_weight(Knn):
             for j in aux:
                 class_list[class_name] = Distancy.weight_distancy(item, j[0])
 
-        return max(class_list, key=class_list.get)
+        return min(class_list, key=class_list.get)

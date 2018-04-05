@@ -7,7 +7,7 @@ from visualization import  Visualization
 from projeto.distancies import Distancy
 from projeto.rotinas import Rotinas
 
-texto = open("../base2.csv")
+texto = open("../base1.csv")
 beans_list = Bean_object.build_bean(texto)
 
 accuracy = []
@@ -19,12 +19,13 @@ generator = Knn.split_data(data, classification)
 print("Knn simples")
 alg = Knn()
 rot = Rotinas()
-rot.run(alg, generator, beans_list)
+rot.set_train_test_set(generator)
+rot.run(alg, beans_list, "../knn_simples.png")
 
 
 print("\n")
 # Weighted knn
 print("knn com peso")
 alg = Knn_weight(Distancy.get_class(beans_list))
-rot = Rotinas()
-rot.run(alg, generator, beans_list)
+rot.clear_mean_accuracy()
+rot.run(alg, beans_list, "../knn_peso.png", True)
