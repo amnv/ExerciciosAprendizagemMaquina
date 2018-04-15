@@ -44,14 +44,14 @@ class Lqv1:
         return learning_rate/d
 
     @staticmethod
-    def train(train_set, train_label, prototype_set, prototype_label, iterations=200, learning_rate=0.001, threshold=0.10):
+    def train(train_set, train_label, prototype_set, prototype_label, iterations=200, learning_rate=0.3, threshold=0.10):
         err = 1
         is_correct_classified = False
         while iterations > 0 and err > threshold and learning_rate > -1:
             for i in range(train_set.shape[0]):
                 c, prototype_position = Lqv1.get_best_class(prototype_set, prototype_label, train_set.loc[i])
                 is_correct_classified = c == train_label.loc[i].item()
-                print("is_correct_classified ", is_correct_classified)
+                #print("is_correct_classified ", is_correct_classified)
                 if is_correct_classified:
                     # Approximate prototype
                     # ei + α(t) × [x − ei]
