@@ -19,7 +19,7 @@ class Lqv2_1:
         s = (1 - width)/ (1 + width)
         return m > s
 
-    def train(self, features, labels, train_size, prototype_amount, categories, iterations=200, learning_rate=0.0g1, threshold=0.10):
+    def train(self, features, labels, train_size, prototype_amount, categories, iterations=200, learning_rate=0.01, threshold=0.10):
         train = features[:train_size]
         train_labels = labels[:train_size]
         prototype_set, prototype_label = Lqv1.build_prototypes(prototype_amount, 10, categories)

@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 
@@ -20,18 +21,18 @@ texto = pd.DataFrame(x_scaled, columns=df.columns)
 
 features = texto.loc[:, texto.columns[:texto.columns.size - 1]]
 labels = texto.iloc[:, [texto.columns.size - 1]]
-# #
+
+skf = StratifiedKFold(n_splits=5)
 categories = texto.defects.unique()
-# # generator = Lqv1.split_data(features, labels)
-# # train_set = []
-# # labels_set = []
-# #
-# # for data, label in generator:
-# #     train_set.append(data)
-# #     labels_set.append(label)
-#
-# train_set = np.asarray(train_set)
-# labels_set = np.asarray(labels_set)
+generator = skf.split(features, labels)
+
+train_set = []
+labels_set = []
+
+print(list(generator))
+
+train_set = np.asarray(train_set)
+labels_set = np.asarray(labels_set)
 
 tam = int(texto.shape[0] * 0.8)
 #tam = int(texto.shape[0]/2)
