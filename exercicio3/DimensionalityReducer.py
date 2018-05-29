@@ -2,9 +2,9 @@ import numpy.linalg as la
 import numpy as np
 import pandas as pd
 
-
 class DimensionalityReducer:
-    def pca(self, data, x_scaled, k=10):
+    @staticmethod
+    def pca(data, x_scaled, k=10):
         cov = data.cov()
         eigenvalues, eigenvectors = la.eig(cov)
 
@@ -20,8 +20,10 @@ class DimensionalityReducer:
         # Transformed dataframe
         return pd.DataFrame(new_data.T, columns=data.columns[eigenvalues_indices])
 
-    def lda(self, data, dimensions, x_scaled, k=10):
+    @staticmethod
+    def lda(data, x_scaled, k=10):
         classes = data.iloc[:, -1].unique()
+        dimensions = data.shape[1] - 1
 
         # Dispersão entre classes
         sb = 0
@@ -47,4 +49,3 @@ class DimensionalityReducer:
 
             new_data = np.matrix(eigenvectors[eigenvalues_indices]) * np.matrix(x_scaled.T)
             return pd.DataFrame(new_data.T, columns=data.columns[eigenvalues_indices])
-
